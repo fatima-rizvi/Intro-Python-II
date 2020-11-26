@@ -3,7 +3,15 @@ from player import Player
 
 # Declare all the items
 items = {
-    
+    'thing': Item("thing", "it's a thing"),
+    'sword': Item("sword", "it's a sword"),
+    'potion': Item("potion", "it's a potion"),
+    'dagger': Item("dagger", "it's a dagger"),
+    'gun': Item("gun", "it's a gun"),
+    'shield': Item("shield", "it's a shield"),
+    'cornucopia': Item("cornucopia", "it's a cornucopia"),
+    'staff': Item("staff", "it's a staff"),
+    'torch': Item("torch", "it's a torch")
 }
 
 # Declare all the rooms
