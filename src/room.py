@@ -16,8 +16,10 @@ class Room:
        return f"{self.stuff}" 
 
     def add_item(self, item):
-        self.stuff.append(item)
-    
-    def
+        self.stuff.append(item.name)
 
+    # def remove_item(self, item):
+    #     self.stuff.remove(item)
+
+    #Check line 84 in in adv.py, the remove isn't working
     

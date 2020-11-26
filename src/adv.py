@@ -81,8 +81,14 @@ while direction != "q":
     take_item = input(f"Do you want to take the {new_player.current_room.stuff.name}? (y/n) ")
     if take_item.lower() == "y":
         new_player.grab(new_player.current_room.stuff)
+        # new_player.current_room.remove_item(new_player.current_room.stuff.name) #For some reason this is accessing the item class instead of the room class, throwing an error
     else:
         print(f"Okay, you are leaving the {new_player.current_room.stuff.name} behind.")
+
+    drop_item = input(f"Would you like to drop an item? (y/n) ")
+    if drop_item.lower() == "y":
+        item_to_drop = str(input(f"What would you like to drop? {new_player.stuff}: "))
+        new_player.drop(item_to_drop.lower().strip())
 
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
