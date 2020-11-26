@@ -17,5 +17,7 @@ class Room:
 
     def add_item(self, item):
         self.stuff.append(item)
+    
+    def
 
     

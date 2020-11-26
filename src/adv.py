@@ -78,6 +78,13 @@ while direction != "q":
     print(new_player.current_room.description)
     print(f"You see something on the ground. It looks like a {new_player.current_room.stuff.name}. {new_player.current_room.stuff.description}")
 
+    take_item = input(f"Do you want to take the {new_player.current_room.stuff.name}? (y/n) ")
+    if take_item.lower() == "y":
+        new_player.grab(new_player.current_room.stuff)
+    else:
+        print(f"Okay, you are leaving the {new_player.current_room.stuff.name} behind.")
+
+
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()
 
@@ -113,12 +120,15 @@ while direction != "q":
 
 #Sam's streamlined code
 # def room_logic(dir):
-#     letter = dir + '_to'
-#     print(letter)
-#     if not getattr(new_player.current_room, letter):
-#         print("There's nothing here! I'll head back!")
+#     if dir == "grab":
+#         new_player.grab(dir)
 #     else:
-#         new_player.current_room = getattr(new_player.current_room, letter)
+#         letter = dir + '_to'
+#         print(letter)
+#         if not getattr(new_player.current_room, letter):
+#             print("There's nothing here! I'll head back!")
+#         else:
+#             new_player.current_room = getattr(new_player.current_room, letter)
 # player_input = input("Where would you like to go? (n/s/e/w or q to exit)")
 # while player_input != 'q':
 #     print(new_player.current_room.name)

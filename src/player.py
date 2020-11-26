@@ -2,14 +2,18 @@
 # currently.
 
 class Player:
-    def __init__(self, name, current_room, items = []):
+    def __init__(self, name, current_room, stuff = []):
         self.name = name
         self.current_room = current_room
-        self.items = items
+        self.stuff = stuff
     
     def __repr__(self):
-        return f"{self.items}"
+        return f"{self.stuff}"
 
+    def grab(self, item):
+        self.stuff.append(item)
+        print(f"Okay, you have picked up the {item.name}")
+        print(f"Your items: {self.stuff}")
 
 #__str__: intended to be human readable
     # ex) date/time: month/day/year etc.
