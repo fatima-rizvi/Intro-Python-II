@@ -1,38 +1,45 @@
 from room import Room
 from player import Player
+import random
+from item import Item
 
 # Declare all the items
-items = {
-    'thing': Item("thing", "it's a thing"),
-    'sword': Item("sword", "it's a sword"),
-    'potion': Item("potion", "it's a potion"),
-    'dagger': Item("dagger", "it's a dagger"),
-    'gun': Item("gun", "it's a gun"),
-    'shield': Item("shield", "it's a shield"),
-    'cornucopia': Item("cornucopia", "it's a cornucopia"),
-    'staff': Item("staff", "it's a staff"),
-    'torch': Item("torch", "it's a torch")
+stuff = {
+    'thing': Item("thing", "It's a thing"),
+    'sword': Item("sword", "It's a sword"),
+    'potion': Item("potion", "It's a potion"),
+    'dagger': Item("dagger", "It's a dagger"),
+    'gun': Item("gun", "It's a gun"),
+    'shield': Item("shield", "It's a shield"),
+    'cornucopia': Item("cornucopia", "It's a cornucopia"),
+    'staff': Item("staff", "It's a staff"),
+    'torch': Item("torch", "It's a torch")
 }
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",
+                     stuff[random.choice(list(stuff.keys()))]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",
+stuff[random.choice(list(stuff.keys()))]),
 }
 
 
@@ -69,7 +76,7 @@ direction = ""
 while direction != "q":
     print("Your current location: ", new_player.current_room.name)
     print(new_player.current_room.description)
-    print("Items in the room: ", new_player.current_room.items)
+    print(f"You see something on the ground. It looks like a {new_player.current_room.stuff.name}. {new_player.current_room.stuff.description}")
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()
