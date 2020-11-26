@@ -1,4 +1,10 @@
 from room import Room
+from player import Player
+
+# Declare all the items
+items = {
+    
+}
 
 # Declare all the rooms
 
@@ -38,6 +44,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+new_player = Player("Buzz Lightyear", room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +56,61 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+direction = ""
+while direction != "q":
+    print("Your current location: ", new_player.current_room.name)
+    print(new_player.current_room.description)
+    print("Items in the room: ", new_player.current_room.items)
+
+    direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
+    print()
+
+    if direction == "n":
+        if new_player.current_room.n_to == None:
+            print("There is no room to the north")
+        else:
+            new_player.current_room = new_player.current_room.n_to
+
+    elif direction == "s":
+        if new_player.current_room.s_to == None:
+            print("There is no room to the south")
+        else:
+            new_player.current_room = new_player.current_room.s_to
+
+    elif direction == "e":
+        if new_player.current_room.e_to == None:
+            print("There is no room to the east")
+        else:
+            new_player.current_room = new_player.current_room.e_to
+
+    elif direction == "w":
+        if new_player.current_room.w_to == None:
+            print("There is no room to the west")
+        else:
+            new_player.current_room = new_player.current_room.w_to
+            
+    elif direction == "q":
+        print("Thank you for playing!")
+
+    else:
+        print("That option doesn't exist, try again")
+
+#Sam's streamlined code
+# def room_logic(dir):
+#     letter = dir + '_to'
+#     print(letter)
+#     if not getattr(new_player.current_room, letter):
+#         print("There's nothing here! I'll head back!")
+#     else:
+#         new_player.current_room = getattr(new_player.current_room, letter)
+# player_input = input("Where would you like to go? (n/s/e/w or q to exit)")
+# while player_input != 'q':
+#     print(new_player.current_room.name)
+#     print(new_player.current_room.description)
+#     print("Items in the room: ", new_player.current_room.items)
+#     room_logic(player_input)
+#     player_input = input("Where would you like to go next? (n/s/e/w or q to exit)")
+# print("thanks for playing")
+    
+
