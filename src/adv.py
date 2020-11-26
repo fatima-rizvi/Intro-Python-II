@@ -1,30 +1,45 @@
 from room import Room
 from player import Player
+import random
+from item import Item
 
 # Declare all the items
-items = {
-    
+stuff = {
+    'thing': Item("thing", "It's a thing"),
+    'sword': Item("sword", "It's a sword"),
+    'potion': Item("potion", "It's a potion"),
+    'dagger': Item("dagger", "It's a dagger"),
+    'gun': Item("gun", "It's a gun"),
+    'shield': Item("shield", "It's a shield"),
+    'cornucopia': Item("cornucopia", "It's a cornucopia"),
+    'staff': Item("staff", "It's a staff"),
+    'torch': Item("torch", "It's a torch")
 }
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",
+                     stuff[random.choice(list(stuff.keys()))]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",
+stuff[random.choice(list(stuff.keys()))]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",
+stuff[random.choice(list(stuff.keys()))]),
 }
 
 
@@ -61,7 +76,20 @@ direction = ""
 while direction != "q":
     print("Your current location: ", new_player.current_room.name)
     print(new_player.current_room.description)
-    print("Items in the room: ", new_player.current_room.items)
+    print(f"You see something on the ground. It looks like a {new_player.current_room.stuff.name}. {new_player.current_room.stuff.description}")
+
+    take_item = input(f"Do you want to take the {new_player.current_room.stuff.name}? (y/n) ")
+    if take_item.lower() == "y":
+        new_player.grab(new_player.current_room.stuff)
+        # new_player.current_room.remove_item(new_player.current_room.stuff.name) #For some reason this is accessing the item class instead of the room class, throwing an error
+    else:
+        print(f"Okay, you are leaving the {new_player.current_room.stuff.name} behind.")
+
+    drop_item = input(f"Would you like to drop an item? (y/n) ")
+    if drop_item.lower() == "y":
+        item_to_drop = str(input(f"What would you like to drop? {new_player.stuff}: "))
+        new_player.drop(item_to_drop.lower().strip())
+
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()
@@ -98,12 +126,15 @@ while direction != "q":
 
 #Sam's streamlined code
 # def room_logic(dir):
-#     letter = dir + '_to'
-#     print(letter)
-#     if not getattr(new_player.current_room, letter):
-#         print("There's nothing here! I'll head back!")
+#     if dir == "grab":
+#         new_player.grab(dir)
 #     else:
-#         new_player.current_room = getattr(new_player.current_room, letter)
+#         letter = dir + '_to'
+#         print(letter)
+#         if not getattr(new_player.current_room, letter):
+#             print("There's nothing here! I'll head back!")
+#         else:
+#             new_player.current_room = getattr(new_player.current_room, letter)
 # player_input = input("Where would you like to go? (n/s/e/w or q to exit)")
 # while player_input != 'q':
 #     print(new_player.current_room.name)
