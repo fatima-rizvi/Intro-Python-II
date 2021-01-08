@@ -76,24 +76,46 @@ direction = ""
 while direction != "q":
     print("Your current location: ", new_player.current_room.name)
     print(new_player.current_room.description)
-    print(f"You see something on the ground. It looks like a {new_player.current_room.stuff.name}. {new_player.current_room.stuff.description}")
+    
+    print()
 
-    take_item = input(f"Do you want to take the {new_player.current_room.stuff.name}? (y/n) ")
-    if take_item.lower() == "y":
-        new_player.grab(new_player.current_room.stuff)
-        # new_player.current_room.remove_item(new_player.current_room.stuff.name) #For some reason this is accessing the item class instead of the room class, throwing an error
-    else:
-        print(f"Okay, you are leaving the {new_player.current_room.stuff.name} behind.")
+    if len(new_player.current_room.stuff) > 0:
+        print(f"You see something on the ground. It looks like")
+    else: 
+        print("There is nothing in this room")
+    new_player.current_room.list_items()
 
-    drop_item = input(f"Would you like to drop an item? (y/n) ")
-    if drop_item.lower() == "y":
-        item_to_drop = str(input(f"What would you like to drop? {new_player.stuff}: "))
-        new_player.drop(item_to_drop.lower().strip())
+    print()
+    access_inventory = ''
+    while access_inventory.lower() != "pass":
+        print(f"This is what you are currently holding: \n{new_player.stuff}")
 
+        access_inventory = input("""
+    What would you like to do?
+    
+    If you would like to pick up an item from the room, type 'get [ITEM_NAME]'
+    If you would like to drop an item from your inventory, type 'drop [ITEM_NAME]'
+    
+    If you don't want to do anything, type 'PASS'
+    
+    Your choice, adventurer: """)
+        print(access_inventory)
+        choice = access_inventory.split(" ")
+        print(choice)
+        if choice[0].lower() == 'get':
+            new_player.grab(choice[1].lower().strip())
+            new_player.current_room.remove_item(choice[1].lower().strip())
+        elif choice[0].lower() == 'drop':
+            new_player.drop(choice[1].lower().strip())
+            new_player.current_room.add_item(choice[1].lower().strip())
+        elif choice[0].lower() == 'pass':
+            print("Okay, you choice not to add or drop any items.")
+        else:
+            print("Hmm, I don't think that's an option")
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()
-
+# command shift down and cntrl shift down to copy and paste
     if direction == "n":
         if new_player.current_room.n_to == None:
             print("There is no room to the north")
@@ -145,3 +167,18 @@ while direction != "q":
 # print("thanks for playing")
     
 
+# My chopped code:
+
+# print(f"You see something on the ground. It looks like a {new_player.current_room.stuff.name}. {new_player.current_room.stuff.description}")
+
+# take_item = input(f"Do you want to take the {new_player.current_room.stuff.name}? (y/n) ")
+    # if take_item.lower() == "y":
+    #     new_player.grab(new_player.current_room.stuff)
+    #     new_player.current_room.remove_item(new_player.current_room.stuff.name) #For some reason this is accessing the item class instead of the room class, throwing an error
+    # else:
+    #     print(f"Okay, you are leaving the {new_player.current_room.stuff.name} behind.")
+
+# drop_item = input(f"Would you like to drop an item? (y/n) ")
+    # if drop_item.lower() == "y":
+    #     item_to_drop = str(input(f"What would you like to drop? {new_player.stuff}: "))
+    #     new_player.drop(item_to_drop.lower().strip())
