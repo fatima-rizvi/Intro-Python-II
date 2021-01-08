@@ -81,9 +81,9 @@ while direction != "q":
 
     if len(new_player.current_room.stuff) > 0:
         print(f"You see something on the ground. It looks like")
+        new_player.current_room.list_items()
     else: 
         print("There is nothing in this room")
-    new_player.current_room.list_items()
 
     print()
     access_inventory = ''
@@ -101,7 +101,9 @@ while direction != "q":
     Your choice, adventurer: """)
         print(access_inventory)
         choice = access_inventory.split(" ")
-        print(choice)
+        # print(choice)
+        
+
         if choice[0].lower() == 'get':
             new_player.grab(choice[1].lower().strip())
             new_player.current_room.remove_item(choice[1].lower().strip())
