@@ -23,6 +23,10 @@ room = {
                      "North of you, the cave mount beckons",
                      stuff[random.choice(list(stuff.keys()))]),
 
+                     # stuff[random.choice(list(stuff.keys()))])
+                     # Explanation of this snippet:
+                     # We're grabbing the keys of the stuff dictionary and turning them into a list. Then we're using the choice method in the random module to randomly select an item form that list (which is a key in the stuff dictionary). Then we call the dictionary value at the randomly selected key by passing the item into the stuff dictionary
+
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""",
 stuff[random.choice(list(stuff.keys()))]),
@@ -102,7 +106,7 @@ while direction != "q":
         print(access_inventory)
         choice = access_inventory.split(" ")
         # print(choice)
-        
+
 
         if choice[0].lower() == 'get':
             new_player.grab(choice[1].lower().strip())
