@@ -83,15 +83,16 @@ while direction != "q":
     print("Your current location: ", new_player.current_room.name)
     print(new_player.current_room.description)
     
-    print()
+    print() # Print a blank line to separate text
 
     if len(new_player.current_room.stuff) > 0:
         print(f"You see something on the ground. It looks like")
         new_player.current_room.list_items()
-    else: 
+    else: # If we've already removed the item from the room, then nothing would print when we run list_items(), so this meesage below just notifies the player that the room is empty.
         print("There is nothing in this room")
 
     print()
+
     access_inventory = ''
     while access_inventory.lower() != "pass":
         print(f"This is what you are currently holding: \n{new_player.stuff}")
@@ -107,18 +108,20 @@ while direction != "q":
     Your choice, adventurer: """)
         print(access_inventory)
         choice = access_inventory.split(" ")
-        # print(choice)
-
+        # By splitting it, the first item in the list (choice[0]) will be either "get", "drop", or "pass", and we can work directly with the action the player wants to take. choice[1], if it exists, will be the item the player wants to interact with.
+        
+        active_item = choice[1].lower().strip()
+        # This will make sure the item name is in lowercase and stripped of any extra spaces.
 
         if choice[0].lower() == 'get':
-            new_player.grab(choice[1].lower().strip())
-            new_player.current_room.remove_item(choice[1].lower().strip())
+            new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
+            new_player.current_room.remove_item(stuff[active_item])
         elif choice[0].lower() == 'drop':
-            new_player.drop(choice[1].lower().strip())
-            new_player.current_room.add_item(choice[1].lower().strip())
+            new_player.drop(stuff[active_item])
+            new_player.current_room.add_item(stuff[active_item])
         elif choice[0].lower() == 'pass':
             print("Okay, you choice not to add or drop any items.")
-        else:
+        else: # In case invalid input is given 
             print("Hmm, I don't think that's an option")
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
