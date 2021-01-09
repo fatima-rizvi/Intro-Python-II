@@ -6,15 +6,15 @@ from item import Item
 
 # Declare all the items
 stuff = {
-    'thing': Item("thing", "It's a thing"),
-    'sword': Item("sword", "It's a sword"),
-    'potion': Item("potion", "It's a potion"),
-    'dagger': Item("dagger", "It's a dagger"),
-    'gun': Item("gun", "It's a gun"),
-    'shield': Item("shield", "It's a shield"),
-    'cornucopia': Item("cornucopia", "It's a cornucopia"),
-    'staff': Item("staff", "It's a staff"),
-    'torch': Item("torch", "It's a torch")
+    'thing': Item("thing", "Not to sure what it is. Might be useful, might be trash."),
+    'sword': Item("sword", "Pretty sharp and sturdy."),
+    'potion': Item("potion", "It's blue, so there's a 50/50 chance that it's either healing or poisonous."),
+    'dagger': Item("dagger", "Rather ornate, might be decorative?"),
+    'gun': Item("gun", "More specifically, a Tokarev TT-30"),
+    'shield': Item("shield", "Unfortunately, it's not Zeus's famed aegis. That would've been nice."),
+    'cornucopia': Item("cornucopia", "Hmm, you might be able to use this for food"),
+    'staff': Item("staff", "Is it like Gandalf's? Or is it just a big stick?"),
+    'torch': Item("torch", "Nice, a light source! That'll be handy.")
 }
 
 # Declare all the rooms
