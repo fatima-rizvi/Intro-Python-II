@@ -1,19 +1,20 @@
 from room import Room
 from player import Player
 import random
+import time # For dramatic pauses and helping the flow of the story
 from item import Item
 
 # Declare all the items
 stuff = {
-    'thing': Item("thing", "It's a thing"),
-    'sword': Item("sword", "It's a sword"),
-    'potion': Item("potion", "It's a potion"),
-    'dagger': Item("dagger", "It's a dagger"),
-    'gun': Item("gun", "It's a gun"),
-    'shield': Item("shield", "It's a shield"),
-    'cornucopia': Item("cornucopia", "It's a cornucopia"),
-    'staff': Item("staff", "It's a staff"),
-    'torch': Item("torch", "It's a torch")
+    'thing': Item("thing", "Not to sure what it is. Might be useful, might be trash."),
+    'sword': Item("sword", "Pretty sharp and sturdy."),
+    'potion': Item("potion", "It's blue, so there's a 50/50 chance that it's either healing or poisonous."),
+    'dagger': Item("dagger", "Rather ornate, might be decorative?"),
+    'gun': Item("gun", "More specifically, a Tokarev TT-30"),
+    'shield': Item("shield", "Unfortunately, it's not Zeus's famed aegis. That would've been nice."),
+    'cornucopia': Item("cornucopia", "Hmm, you might be able to use this for food"),
+    'staff': Item("staff", "Is it like Gandalf's? Or is it just a big stick?"),
+    'torch': Item("torch", "Nice, a light source! That'll be handy.")
 }
 
 # Declare all the rooms
@@ -66,6 +67,10 @@ room['treasure'].s_to = room['narrow']
 # new_player = Player("Buzz Lightyear", room['outside'])
 player_name = input("Hello adventurer! What is you name?: ")
 new_player = Player(player_name, room['outside'])
+print(f"Good luck on your quest, {new_player.name}...\n")
+time.sleep(2)
+print("... You might need it\n")
+time.sleep(1.5)
 
 # Write a loop that:
 #
@@ -81,37 +86,44 @@ new_player = Player(player_name, room['outside'])
 direction = ""
 while direction != "q":
     print("Your current location: ", new_player.current_room.name)
-    print(new_player.current_room.description)
-    
-    print() # Print a blank line to separate text
-
-    if len(new_player.current_room.stuff) > 0:
-        print(f"You see something on the ground. It looks like")
-        new_player.current_room.list_items()
-    else: # If all items have already been removed from the room, then nothing would print when list_items() is called, so this meesage below just notifies the player that the room is empty.
-        print("There is nothing in this room")
-
-    print()
+    time.sleep(1)
+    print(f"{new_player.current_room.description}\n")
 
     access_inventory = ''
     while access_inventory.lower() != "pass":
-        print(f"This is what you are currently holding: \n{new_player.stuff}")
+        time.sleep(1)
+        print(f"This is what you are currently holding: \n{new_player.stuff}\n")
 
+        time.sleep(1)
+
+        if len(new_player.current_room.stuff) > 0:
+            print(f"You see something on the ground. It looks like")
+            new_player.current_room.list_items()
+        else: # If all items have already been removed from the room, then nothing would print when list_items() is called, so this meesage below just notifies the player that the room is empty.
+            print("There is nothing in this room")
+
+        time.sleep(1)
+
+        print("\nWhat would you like to do?")
+
+        time.sleep(1)
+        
         access_inventory = input("""
-    What would you like to do?
-    
     If you would like to pick up an item from the room, type 'get [ITEM_NAME]'
     If you would like to drop an item from your inventory, type 'drop [ITEM_NAME]'
     
     If you don't want to do anything, type 'PASS'
     
     Your choice, adventurer: """)
-        print(access_inventory)
+
         choice = access_inventory.split(" ")
         # By splitting it, the first item in the list (choice[0]) will be either "get", "drop", or "pass", and I can work directly with the action the player wants to take. choice[1], if it exists, will be the item the player wants to interact with.
         
-        active_item = choice[1].lower().strip()
-        # This will make sure the item name is in lowercase and stripped of any extra spaces.
+        if len(choice) > 1:
+            # This will make sure the item name is in lowercase and stripped of any extra spaces.
+            active_item = choice[1].lower().strip()
+
+        print() # Printing a blank line before any messages from actions can be printed
 
         if choice[0].lower() == 'get':
             new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
@@ -120,9 +132,10 @@ while direction != "q":
             new_player.drop(stuff[active_item])
             new_player.current_room.add_item(stuff[active_item])
         elif choice[0].lower() == 'pass':
-            print("Okay, you choice not to add or drop any items.")
+            print("Okay, you chose not to add or drop any items.\n")
         else: # In case invalid input is given 
             print("Hmm, I don't think that's an option")
+
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()

@@ -1,6 +1,6 @@
 # Implement a class to hold room information. This should have name and
 # description attributes.
-# from item import Item
+import time #For better story telling effect
 
 class Room:
     def __init__(self, name, description, stuff = []):
@@ -17,6 +17,7 @@ class Room:
 
     def list_items(self):
         for i in range(0, len(self.stuff)):
+            time.sleep(1)
             print(f"{i + 1}. A {self.stuff[i].name}. {self.stuff[i].description}")
 
     def add_item(self, item):
