@@ -25,7 +25,7 @@ room = {
 
                      # stuff[random.choice(list(stuff.keys()))])
                      # Explanation of this snippet:
-                     # We're grabbing the keys of the stuff dictionary and turning them into a list. Then we're using the choice method in the random module to randomly select an item form that list (which is a key in the stuff dictionary). Then we call the dictionary value at the randomly selected key by passing the item into the stuff dictionary
+                     # This grabs the keys of the stuff dictionary and turning them into a list. Then using the choice method in the random module it randomly selects an item from that list (which is a key in the stuff dictionary). Then it calls the dictionary value at the randomly selected key by passing the item into the stuff dictionary
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""",
@@ -88,7 +88,7 @@ while direction != "q":
     if len(new_player.current_room.stuff) > 0:
         print(f"You see something on the ground. It looks like")
         new_player.current_room.list_items()
-    else: # If we've already removed the item from the room, then nothing would print when we run list_items(), so this meesage below just notifies the player that the room is empty.
+    else: # If all items have already been removed from the room, then nothing would print when list_items() is called, so this meesage below just notifies the player that the room is empty.
         print("There is nothing in this room")
 
     print()
@@ -108,7 +108,7 @@ while direction != "q":
     Your choice, adventurer: """)
         print(access_inventory)
         choice = access_inventory.split(" ")
-        # By splitting it, the first item in the list (choice[0]) will be either "get", "drop", or "pass", and we can work directly with the action the player wants to take. choice[1], if it exists, will be the item the player wants to interact with.
+        # By splitting it, the first item in the list (choice[0]) will be either "get", "drop", or "pass", and I can work directly with the action the player wants to take. choice[1], if it exists, will be the item the player wants to interact with.
         
         active_item = choice[1].lower().strip()
         # This will make sure the item name is in lowercase and stripped of any extra spaces.
@@ -126,7 +126,7 @@ while direction != "q":
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
     print()
-# command shift down and cntrl shift down to copy and paste
+# command shift down and alt shift down to copy and paste
     if direction == "n":
         if new_player.current_room.n_to == None:
             print("There is no room to the north")
