@@ -23,11 +23,13 @@ class Room:
         self.stuff.append(item)
 
     def remove_item(self, item):
-        # self.stuff.remove(item)
-        print(self.stuff)
-        for i in range(0, len(self.stuff)):
-            if self.stuff[i].name == item:
-                self.stuff.pop(i)
+        self.stuff.remove(item)
 
-    #Check line 84 in in adv.py, the remove isn't working
+        # The .remove is now working, and the code below isn't working perfectly so I'm not using it.
+        # print(self.stuff)
+        # for i in range(0, len(self.stuff)):
+        #     if self.stuff[i].name == item:
+        #         self.stuff.pop(i)
+
+
     
