@@ -177,7 +177,7 @@ while direction != "q":
             new_player.current_room = new_player.current_room.w_to
             
     elif direction == "q":
-        print("Thank you for playing!")
+        print("Thank you for playing! Best of luck on your next adventure.")
 
     else:
         print("That option doesn't exist, try again")
