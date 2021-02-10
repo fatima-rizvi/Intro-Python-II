@@ -129,6 +129,8 @@ while direction != "q":
             if stuff[active_item] in new_player.current_room.stuff:
                 new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
                 new_player.current_room.remove_item(stuff[active_item])
+            else:
+                print("That item is not in the room")
         elif choice[0].lower() == 'drop':
             if stuff[active_item] in new_player.stuff:
                 new_player.drop(stuff[active_item])
