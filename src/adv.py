@@ -126,8 +126,9 @@ while direction != "q":
         print() # Printing a blank line before any messages from actions can be printed
 
         if choice[0].lower() == 'get':
-            new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
-            new_player.current_room.remove_item(stuff[active_item])
+            if stuff[active_item] in new_player.current_room.stuff:
+                new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
+                new_player.current_room.remove_item(stuff[active_item])
         elif choice[0].lower() == 'drop':
             new_player.drop(stuff[active_item])
             new_player.current_room.add_item(stuff[active_item])
