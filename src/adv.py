@@ -130,8 +130,9 @@ while direction != "q":
                 new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
                 new_player.current_room.remove_item(stuff[active_item])
         elif choice[0].lower() == 'drop':
-            new_player.drop(stuff[active_item])
-            new_player.current_room.add_item(stuff[active_item])
+            if stuff[active_item] in new_player.stuff:
+                new_player.drop(stuff[active_item])
+                new_player.current_room.add_item(stuff[active_item])
         elif choice[0].lower() == 'pass':
             print("Okay, you chose not to add or drop any items.\n")
         else: # In case invalid input is given 
