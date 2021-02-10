@@ -125,22 +125,25 @@ while direction != "q":
 
         print() # Printing a blank line before any messages from actions can be printed
 
-        if choice[0].lower() == 'get':
-            if stuff[active_item] in new_player.current_room.stuff:
-                new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
-                new_player.current_room.remove_item(stuff[active_item])
-            else:
-                print("That item is not in the room")
-        elif choice[0].lower() == 'drop':
-            if stuff[active_item] in new_player.stuff:
-                new_player.drop(stuff[active_item])
-                new_player.current_room.add_item(stuff[active_item])
-            else:
-                print("You are not holding that item")
-        elif choice[0].lower() == 'pass':
-            print("Okay, you chose not to add or drop any items.\n")
-        else: # In case invalid input is given 
-            print("Hmm, I don't think that's an option")
+        if active_item in stuff:    # Checks that the item is valid
+            if choice[0].lower() == 'get':
+                if stuff[active_item] in new_player.current_room.stuff:
+                    new_player.grab(stuff[active_item]) #Accessing the item dictionary with the name of the active item as the key so that we are passing in the whole item to any methods
+                    new_player.current_room.remove_item(stuff[active_item])
+                else:
+                    print("That item is not in the room")
+            elif choice[0].lower() == 'drop':
+                if stuff[active_item] in new_player.stuff:
+                    new_player.drop(stuff[active_item])
+                    new_player.current_room.add_item(stuff[active_item])
+                else:
+                    print("You are not holding that item")
+            elif choice[0].lower() == 'pass':
+                print("Okay, you chose not to add or drop any items.\n")
+            else: # In case invalid input is given 
+                print("Hmm, I don't think that's an option")
+        else:
+            print("That item in unavailable.")
 
 
     direction = input("Where would you like to go? (n/s/e/w) OR q for quit: ")
