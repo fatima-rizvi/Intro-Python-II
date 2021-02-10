@@ -135,6 +135,8 @@ while direction != "q":
             if stuff[active_item] in new_player.stuff:
                 new_player.drop(stuff[active_item])
                 new_player.current_room.add_item(stuff[active_item])
+            else:
+                print("You are not holding that item")
         elif choice[0].lower() == 'pass':
             print("Okay, you chose not to add or drop any items.\n")
         else: # In case invalid input is given 
